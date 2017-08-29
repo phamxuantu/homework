@@ -5,115 +5,126 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context="com.example.xuantu.androidky9.MainActivity">
 
-    <EditText
-        android:id="@+id/edtSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Search ..."
-        android:textSize="30sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search ..."
+            android:textSize="30sp"
+            android:maxLines="1"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Full name"
-                android:textSize="30sp" />
-
-            <EditText
-                android:id="@+id/edtName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Your Name"
-                android:textSize="30sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Sex"
-                android:textSize="30sp" />
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/radioSex"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/radioMale"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Full name"
+                    android:textSize="30sp" />
+
+                <EditText
+                    android:id="@+id/edtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Your Name"
+                    android:textSize="30sp"
+                    android:maxLines="1"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Male"
-                    android:textSize="25sp" />
+                    android:layout_weight="1"
+                    android:text="Sex"
+                    android:textSize="30sp" />
 
-                <RadioButton
-                    android:id="@+id/radioFemale"
+                <RadioGroup
+                    android:id="@+id/radioSex"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Female"
-                    android:textSize="25sp" />
-            </RadioGroup>
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:textSize="25sp" />
+
+                    <RadioButton
+                        android:id="@+id/radioFemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Female"
+                        android:textSize="25sp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Skill"
+                    android:textSize="30sp" />
+
+                <EditText
+                    android:id="@+id/edtSkill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Skills"
+                    android:textSize="25sp"
+                    android:maxLines="1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btnAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Add" />
+
+                <Button
+                    android:id="@+id/btnEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Edit" />
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <ListView
+            android:id="@+id/lvListStudent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"></ListView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Skill"
-                android:textSize="30sp" />
-
-            <EditText
-                android:id="@+id/edtSkill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Skills"
-                android:textSize="25sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add"
-                android:layout_weight="1"
-                android:id="@+id/btnAdd"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit"
-                android:layout_weight="1"
-                android:id="@+id/btnEdit"/>
-        </LinearLayout>
-    </LinearLayout>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/lvListStudent">
-    </ListView>
 </LinearLayout>

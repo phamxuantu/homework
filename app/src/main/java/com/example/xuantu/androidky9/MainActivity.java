@@ -1,10 +1,14 @@
 package com.example.xuantu.androidky9;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -14,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     CustomListStudent adapterStudent;
     String sex;
     int position;
+    LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +49,20 @@ public class MainActivity extends AppCompatActivity {
         lvListStudent = (ListView) findViewById(R.id.lvListStudent);
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnEdit = (Button) findViewById(R.id.btnEdit);
+        layout = (LinearLayout)findViewById(R.id.activity_main);
 
         btnAdd.setEnabled(false);
         btnEdit.setEnabled(false);
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+       layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }
+        });
 
         listStudent.add(new Student(
                 "Phạm Xuân Tú",
@@ -158,6 +173,44 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                 }
+            }
+        });
+
+        lvListStudent.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                final Student student = (Student) ((CustomListStudent ) adapterView.getAdapter()).getItem(i);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                alertDialogBuilder.setMessage("Do you want to delete " + student.getName() + "?");
+                alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        for(int j = 0; j < listStudent.size(); j++){
+                            if(student.getName().equals(listStudent.get(j).getName())){
+                                listStudent.remove(j);
+                                if(!edtSearch.getText().toString().equals("")){
+                                    adapterStudent.filter.filter(edtSearch.getText().toString());
+                                }
+                                adapterStudent.notifyDataSetChanged();
+                                break;
+                            }
+                        }
+                    }
+                });
+
+                alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+                return true;
             }
         });
 
